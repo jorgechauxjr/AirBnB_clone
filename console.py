@@ -9,7 +9,9 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = '(hbnb) '
 
-    __myClasses = ["BaseModel", "User", "Place", "State", "City", "Amenity", "Review"]
+    __myClasses = [
+        "BaseModel", "User", "State",
+        "City", "Place", "Amenity", "Review"]
 
     def do_EOF(self, line):
         """End of file function """
@@ -20,16 +22,25 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_create(self, args):
-        """Creates a new instance of BaseModel, saves it (to the JSON file) and prints the id"""
+        """Creates a new instance of BaseModel,
+        saves it (to the JSON file) and prints the id"""
         args = shlex.split(args)
         if args == []:
-            print("** class doesn't exist **")
+            print("** class name missing **")
         elif args[0] not in HBNBCommand.__myClasses:
             print("** class doesn't exist **")
         pass
 
-    def do_show(self, line):
-        """Prints the string representation of an instance based on the class name and id"""
+    def do_show(self, args):
+        """Prints the string representation of an
+        instance based on the class name and id"""
+        args = shlex.split(args)
+        if args == []:
+            print("** class name missing **")
+        elif args[0] not in HBNBCommand.__myClasses:
+            print("** class doesn't exist **")
+        elif len(args) == 1:
+            print("** instance id missing **")
         pass
 
     def do_destroy(self, line):
@@ -37,14 +48,14 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_all(self, line):
-        """ Prints all string representation of all instances based or not on the class name."""
+        """ Prints all string representation of all
+        instances based or not on the class name."""
         pass
 
     def do_update(self, line):
-        """Updates an instance based on the class name and id by adding or updating attribute """
+        """Updates an instance based on the class name
+        and id by adding or updating attribute """
         pass
-    
-
 
     def emptyline(self):
         """print a new empty line"""
