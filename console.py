@@ -85,7 +85,13 @@ class HBNBCommand(cmd.Cmd):
         args = shlex.split(args)
         if args[0] not in HBNBCommand.__myClasses:
             print("** class doesn't exist **")
-        pass
+        else:
+            models.storage.reload()
+            my_list = []
+            for i, obj in models.storage.all().items():
+                if obj.__class__.__name__ == args[0]:
+                    my_list.append(obj.__str__())
+            print(my_list)
 
     def do_update(self, line):
         """Updates an instance based on the class name
