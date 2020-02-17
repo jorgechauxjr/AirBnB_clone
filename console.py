@@ -3,6 +3,12 @@ import cmd
 import shlex
 import models
 from models.base_model import BaseModel
+from models.user import User
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
@@ -63,7 +69,15 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         elif len(args) == 1:
             print("** instance id missing **")
-        pass
+        else:
+            models.storage.reload()
+            my_objs = models.storage.all()
+            for k, obj in my_objs.items():
+                if obj.id == args[1] and obj.__class__.__name__ == args[0]:
+                    del(my_objs[k])
+                    models.storage.save()
+                    return
+            print("** no instance found **")
 
     def do_all(self, args):
         """ Prints all string representation of all
