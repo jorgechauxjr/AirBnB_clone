@@ -2,6 +2,7 @@
 import cmd
 import shlex
 import models
+from models.base_model import BaseModel
 
 
 class HBNBCommand(cmd.Cmd):
@@ -29,7 +30,11 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         elif args[0] not in HBNBCommand.__myClasses:
             print("** class doesn't exist **")
-        pass
+        else:
+            models.storage.reload()
+            instance = eval(args[0])()
+            instance.save()
+            print(instance.id)
 
     def do_show(self, args):
         """Prints the string representation of an
