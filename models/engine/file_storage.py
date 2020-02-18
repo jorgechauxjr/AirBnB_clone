@@ -26,10 +26,11 @@ class FileStorage:
             json.dump(d, f)
 
     def reload(self):
+        """reload method"""
         try:
             with open(self.__file_path, 'r', encoding='utf-8') as f:
                 jf = json.load(f)
             for key in jf:
                 self.__objects[key] = classes[jf[key]["__class__"]](**jf[key])
-        except:
+        except Exception:
             pass
