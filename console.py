@@ -93,10 +93,35 @@ class HBNBCommand(cmd.Cmd):
                     my_list.append(obj.__str__())
             print(my_list)
 
-    def do_update(self, line):
+    def do_update(self, args):
         """Updates an instance based on the class name
         and id by adding or updating attribute """
-        pass
+        args = shlex.split(args)
+        if args == []:
+            print("** class name missing **")
+        elif args[0] not in HBNBCommand.__myClasses:
+            print("** class doesn't exist **")
+        elif len(args) == 1:
+            print("** instance id missing **")
+        else:
+            models.storage.reload()
+            my_objs = models.storage.all()
+            for i, obj in my_objs.items():
+                if obj.id == args[1] and obj.__class__.__name__ == args[0]:
+                    if len(args) == 2:
+                        print("** attribute name missing **")
+                        return
+                    elif len(args) == 3:
+                        print("** value missing **")
+                        return
+                    else:
+                        new_att = args[3]
+                        if hasattr(obj, str(args[2])):
+                            new_att = (type(getattr(obj, args[2])))(args[3])
+                        obj.__dict__[args[2]] = new_att
+                        models.storage.save()
+                        return
+            print("** no instance found **")
 
     def emptyline(self):
         """print a new empty line"""

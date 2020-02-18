@@ -15,8 +15,9 @@ class FileStorage:
 
     def new(self, obj):
         """new method"""
-        key = "{}.{}".format(type(obj).__name__, obj.id)
-        FileStorage.__objects[key] = obj
+        if obj:
+            key = "{}.{}".format(type(obj).__name__, obj.id)
+            FileStorage.__objects[key] = obj
 
     def save(self):
         """save method"""
