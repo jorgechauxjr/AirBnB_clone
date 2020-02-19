@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import cmd
 import shlex
+from shlex import split
 import models
 from models.base_model import BaseModel
 from models.user import User
@@ -153,6 +154,20 @@ class HBNBCommand(cmd.Cmd):
             self.lastcmd = ""
             return self.onecmd('\n')
 
+    def do_count(self, args):
+        """count"""
+        counter = 0
+        args = split(args, " ")
+        if args[0] not in HBNBCommand.__myClasses:
+            print("** class doesn't exist **")
+        else:
+            things = models.storage.all()
+            for key in things:
+                name = key.split('.')
+            if name[0] == args[0]:
+                counter += 1
+            print(counter)
+
     def default(self, args):
         """do the default """
         my_list = args.split('.')
@@ -160,7 +175,7 @@ class HBNBCommand(cmd.Cmd):
             if my_list[1] == "all()":
                 self.do_all(my_list[0])
             elif my_list[1] == "count()":
-                self.count(my_list[0])
+                self.do_count(my_list[0])
             elif my_list[1][:4] == "show":
                 self.do_show(self.parse(my_list))
             elif my_list[1][:7] == "destroy":
