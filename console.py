@@ -83,7 +83,13 @@ class HBNBCommand(cmd.Cmd):
         """ Prints all string representation of all
         instances based or not on the class name."""
         args = shlex.split(args)
-        if args[0] not in HBNBCommand.__myClasses:
+        if len(args) == 0:
+            models.storage.reload()
+            my_list = []
+            for i, obj in models.storage.all().items():
+                my_list.append(obj.__str__())
+            print(my_list)
+        elif args[0] not in HBNBCommand.__myClasses:
             print("** class doesn't exist **")
         else:
             models.storage.reload()
