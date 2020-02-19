@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-'''Tests for BaseModel class'''
+'''Tests for User class'''
 import models
 from models.base_model import BaseModel
 from models.user import User
