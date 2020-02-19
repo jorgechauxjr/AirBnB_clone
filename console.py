@@ -170,20 +170,20 @@ class HBNBCommand(cmd.Cmd):
 
     def default(self, args):
         """do the default """
-        my_list = args.split('.')
-        if len(my_list) >= 2:
-            if my_list[1] == "all()":
-                self.do_all(my_list[0])
-            elif my_list[1] == "count()":
-                self.do_count(my_list[0])
-            elif my_list[1][:4] == "show":
-                self.do_show(self.parse(my_list))
-            elif my_list[1][:7] == "destroy":
-                self.do_destroy(self.parse(my_list))
-            elif my_list[1][:6] == "update":
-                args = self.parse(my_list)
+        sargs = args.split('.')
+        if len(sargs) >= 2:
+            if sargs[1] == "all()":
+                self.do_all(sargs[0])
+            elif sargs[1] == "count()":
+                self.do_count(sargs[0])
+            elif sargs[1][:4] == "show":
+                self.do_show(self.parse(sargs))
+            elif sargs[1][:7] == "destroy":
+                self.do_destroy(self.parse(sargs))
+            elif sargs[1][:6] == "update":
+                args = self.parse(sargs)
                 if isinstance(args, list):
-                    obj = storage.all()
+                    obj = models.storage.all()
                     key = args[0] + ' ' + args[1]
                     for k, v in args[2].items():
                         self.do_update(key + ' "{}" "{}"'.format(k, v))
