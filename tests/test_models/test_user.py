@@ -20,8 +20,15 @@ class TestUser(unittest.TestCase):
 
     @classmethod
     def teardown(cls):
-        """at the end of the test this will tear it down"""
+        """teardonw"""
         del cls.user
+
+    def tearDown(self):
+        """teardown"""
+        try:
+            os.remove("file.json")
+        except Exception:
+            pass
 
     def test_00(self):
         """chekcing the attrs"""
@@ -32,3 +39,23 @@ class TestUser(unittest.TestCase):
         self.assertTrue('password' in self.user.__dict__)
         self.assertTrue('first_name' in self.user.__dict__)
         self.assertTrue('last_name' in self.user.__dict__)
+
+    def test_01(self):
+        """is a subclass"""
+        self.assertTrue(issubclass(self.user.__class__, BaseModel), True)
+
+    def test_02(self):
+        """types"""
+        self.assertEqual(type(self.user.email), str)
+        self.assertEqual(type(self.user.password), str)
+        self.assertEqual(type(self.user.first_name), str)
+        self.assertEqual(type(self.user.first_name), str)
+
+    def test_03(self):
+        """dict"""
+        self.assertEqual('to_dict' in dir(self.user), True)
+
+    def test_04(self):
+        """save"""
+        self.user.save()
+        self.assertNotEqual(self.user.created_at, self.user.updated_at)
