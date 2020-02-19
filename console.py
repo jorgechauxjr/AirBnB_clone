@@ -129,11 +129,53 @@ class HBNBCommand(cmd.Cmd):
                         return
             print("** no instance found **")
 
+    def parse(self, args):
+        """strtok"""
+        new_list = []
+        new_list.append(args[0])
+        try:
+            my_dict = eval(
+                args[1][args[1].find('{'):args[1].find('}')+1])
+        except Exception:
+            my_dict = None
+        if isinstance(my_dict, dict):
+            new_str = args[1][args[1].find('(')+1:args[1].find(')')]
+            new_list.append(((new_str.split(", "))[0]).strip('"'))
+            new_list.append(my_dict)
+            return new_list
+        new_str = args[1][args[1].find('(')+1:args[1].find(')')]
+        new_list.append(" ".join(new_str.split(", ")))
+        return " ".join(i for i in new_list)
+
     def emptyline(self):
         """print a new empty line"""
         if self.lastcmd:
             self.lastcmd = ""
             return self.onecmd('\n')
+
+    def default(self, args):
+        """do the default """
+        my_list = args.split('.')
+        if len(my_list) >= 2:
+            if my_list[1] == "all()":
+                self.do_all(my_list[0])
+            elif my_list[1] == "count()":
+                self.count(my_list[0])
+            elif my_list[1][:4] == "show":
+                self.do_show(self.parse(my_list))
+            elif my_list[1][:7] == "destroy":
+                self.do_destroy(self.parse(my_list))
+            elif my_list[1][:6] == "update":
+                args = self.parse(my_list)
+                if isinstance(args, list):
+                    obj = storage.all()
+                    key = args[0] + ' ' + args[1]
+                    for k, v in args[2].items():
+                        self.do_update(key + ' "{}" "{}"'.format(k, v))
+                else:
+                    self.do_update(args)
+        else:
+            cmd.Cmd.default(self, args)
 
 
 if __name__ == '__main__':
