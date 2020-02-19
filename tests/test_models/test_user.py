@@ -1,61 +1,36 @@
 #!/usr/bin/python3
-"""test for user"""
-import unittest
-import os
-from models.user import User
+'''Tests for BaseModel class'''
+import models
 from models.base_model import BaseModel
+from models.user import User
+import os
+import unittest
 
 
 class TestUser(unittest.TestCase):
-    """Test user"""
+    '''start tests'''
 
-    @classmethod
-    def setUpClass(cls):
-        """set up for test"""
-        cls.user = User()
-        cls.user.first_name = "Alejo"
-        cls.user.last_name = "Lopez"
-        cls.user.email = "alejolo311@gmamil.com"
-        cls.user.password = "thisisthepass"
+    def test_docstring(self):
+        '''test if funcions, methods, classes
+        and modules have docstring'''
+        msj = "Módulo does not has docstring"
+        self.assertIsNotNone(models.user.__doc__, msj)  # Modules
+        msj = "Clase does not has docstring"
+        self.assertIsNotNone(User.__doc__, msj)  # Classes
 
-    @classmethod
-    def teardown(cls):
-        """teardonw"""
-        del cls.user
+    def test_executable_file(self):
+        '''test if file has permissions u+x to execute'''
+        # Check for read access
+        is_read_true = os.access('models/user.py', os.R_OK)
+        self.assertTrue(is_read_true)
+        # Check for write access
+        is_write_true = os.access('models/user.py', os.W_OK)
+        self.assertTrue(is_write_true)
+        # Check for execution access
+        is_exec_true = os.access('models/user.py', os.X_OK)
+        self.assertTrue(is_exec_true)
 
-    def tearDown(self):
-        """teardown"""
-        try:
-            os.remove("file.json")
-        except Exception:
-            pass
-
-    def test_00(self):
-        """chekcing the attrs"""
-        self.assertTrue('email' in self.user.__dict__)
-        self.assertTrue('id' in self.user.__dict__)
-        self.assertTrue('created_at' in self.user.__dict__)
-        self.assertTrue('updated_at' in self.user.__dict__)
-        self.assertTrue('password' in self.user.__dict__)
-        self.assertTrue('first_name' in self.user.__dict__)
-        self.assertTrue('last_name' in self.user.__dict__)
-
-    def test_01(self):
-        """is a subclass"""
-        self.assertTrue(issubclass(self.user.__class__, BaseModel), True)
-
-    def test_02(self):
-        """types"""
-        self.assertEqual(type(self.user.email), str)
-        self.assertEqual(type(self.user.password), str)
-        self.assertEqual(type(self.user.first_name), str)
-        self.assertEqual(type(self.user.first_name), str)
-
-    def test_03(self):
-        """dict"""
-        self.assertEqual('to_dict' in dir(self.user), True)
-
-    def test_04(self):
-        """save"""
-        self.user.save()
-        self.assertNotEqual(self.user.created_at, self.user.updated_at)
+    def test_is_an_instance(self):
+        '''check if my_model is an instance of BaseModel'''
+        my_user = User()
+        self.assertIsInstance(my_user, User)
