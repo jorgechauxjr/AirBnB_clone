@@ -40,14 +40,6 @@ class TestBase_Model(unittest.TestCase):
         my_model1 = BaseModel()
         self.assertNotEqual(my_model.id, my_model1.id)
 
-    def test_str(self):
-        '''check if the output of str is in the specified format'''
-        my_model4 = BaseModel()
-        _dict = my_model4.__dict__
-        string1 = "[BaseModel] ({}) {}".format(my_model4.id, _dict)
-        string2 = str(my_model4)
-        self.assertEqual(string1, string2)
-
     def test_save(self):
         '''check if the attribute updated_at (date) is updated for
         the same object with the current date'''
