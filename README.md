@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://holbertonintranet.s3.amazonaws.com/uploads/medias/2018/6/65f4a1dd9c51265f49d0.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOUZGDONYM4%2F20200220%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20200220T194205Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=d46bbaa000bb743f365d7df6c8b1581fc9a521e93a64b1ed44fa7a4737397ad9" alt="HolbertonBnB logo">
+  <img src="https://twitter.com/jorgechauxjr/status/1231956025214951424/photo/1" alt="HolbertonBnB logo">
 </p>
 
 <h1 align="center">0x00. AirBnB clone - The console</h1>
