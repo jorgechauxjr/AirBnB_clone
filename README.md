@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="https://twitter.com/jorgechauxjr/status/1231956025214951424/photo/1" alt="HolbertonBnB logo">
-</p>
+![](https://camo.githubusercontent.com/9ebbf60e208b031d4dcf7db6ffc19fe0339d0ff3/68747470733a2f2f692e6962622e636f2f64354e38354e682f68626e622e706e67)
 
 <h1 align="center">0x00. AirBnB clone - The console</h1>
 <p align="center"></p>
