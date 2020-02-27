@@ -100,4 +100,4 @@ File Name | Description
 
 ### Authors
 * Alejandro Lopez | [GitHub](https://github.com/alejolo311) |
-* Jorge Chaux | [GitHub](https://github.com/jorgechauxjr) |
+* Jorge Chaux Jr | [GitHub](https://github.com/jorgechauxjr) |
