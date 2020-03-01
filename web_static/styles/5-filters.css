@@ -26,8 +26,13 @@ button:hover {
     width: 25%;
     margin: 0;
     float: left; 
-    /* position: relative;  */
+    position: relative;
 }
+.locations {
+    border-right: 1px #DDDDDD solid;
+    float: left;
+}
+
 .locations h3, .amenities h3{
     font-weight: 600;
     margin: inherit;
